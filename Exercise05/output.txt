@@ -1,0 +1,6 @@
+Serial Fibonacci(40)   = 102334155
+Serial execution time  = 0.340858 seconds
+Parallel Fibonacci(40) = 102334155
+Parallel execution time = 0.246053 seconds
+Threads used             = 4
+Verification: Results are identical.

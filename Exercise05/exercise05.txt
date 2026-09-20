@@ -1,1 +1,27 @@
+Exercise 5 - Fibonacci Task Parallelization
 
+The serial Fibonacci function calculates fib(n-1) and fib(n-2)
+sequentially. These two recursive calculations are independent and
+can therefore be executed as separate OpenMP tasks.
+
+The parallel version creates one task to calculate fib(n-1) and a
+second task to calculate fib(n-2). The shared clauses allow the tasks
+to store their results in the variables i and j belonging to the
+current function call.
+
+The #pragma omp taskwait directive ensures that both child tasks have
+completed before the function calculates and returns i + j.
+
+The initial call is placed inside an OpenMP parallel region so that a
+team of threads is available to execute the tasks. The single
+directive ensures that only one thread starts the initial recursive
+calculation.
+
+A cutoff value of 20 is used to prevent the program from creating a
+very large number of small tasks. When n is less than or equal to the
+cutoff, the serial function is used. This reduces task-management
+overhead while retaining task parallelism for the larger calculations.
+
+The serial and parallel versions both produce Fibonacci(40) =
+102334155. The execution time can vary depending on task overhead,
+processor load, compiler optimization, and the number of threads.
