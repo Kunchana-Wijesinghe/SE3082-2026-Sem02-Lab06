@@ -1,0 +1,15 @@
+Exercise 1 - OpenMP Barrier
+
+The #pragma omp barrier directive creates a synchronization point
+inside the parallel region. Each thread first prints that it has
+reached the barrier. A thread that reaches the barrier must wait
+until every other thread in the parallel region has also reached
+the same barrier.
+
+After all threads reach the barrier, they are released and continue
+executing the statements that follow it. Therefore, all "reached the
+barrier" messages appear before any "passed the barrier" messages.
+
+The exact order of the thread numbers may change between executions
+because OpenMP threads run concurrently and their scheduling order is
+not guaranteed.
