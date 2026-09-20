@@ -1,0 +1,9 @@
+Array size              = 1000000
+Strip size              = 1024
+Threads used            = 4
+Serial execution time   = 0.006217 seconds
+Parallel execution time = 0.004329 seconds
+Speedup                 = 1.44x
+Verification errors     = 0
+Checksum                = 18182312500.00
+Verification: Results are identical.

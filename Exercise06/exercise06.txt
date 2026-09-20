@@ -1,0 +1,32 @@
+Exercise 6 - Array Multiplication Using Strip Mining
+
+The program performs element-wise multiplication of arrays A and B
+and stores the result in array C:
+
+C[i] = A[i] * B[i]
+
+All arrays contain 1,000,000 elements.
+
+Strip mining divides the complete array into smaller fixed-size blocks
+called strips. A strip size of 1024 elements is used. Since 1024 is a
+multiple of common SIMD vector widths, including eight single-precision
+floating-point values in a 256-bit SIMD register, it is suitable for
+vector processing.
+
+The OpenMP parallel for directive distributes the strips among the
+available threads. Each thread processes one or more strips. Inside
+each strip, the omp simd directive allows the compiler to vectorize
+the element-wise multiplication loop.
+
+Static scheduling is used because every array element requires
+approximately the same amount of work. This gives the threads a
+predictable and balanced distribution of strips.
+
+The arrays are aligned on a 64-byte boundary to support efficient
+memory access. The result is compared with a serial implementation.
+Zero verification errors confirm that the parallel strip-mined result
+is correct.
+
+Execution times can vary because of processor load, memory bandwidth,
+compiler optimizations, thread-management overhead, and the execution
+environment.
