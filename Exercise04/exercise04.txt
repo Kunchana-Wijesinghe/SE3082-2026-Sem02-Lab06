@@ -1,1 +1,35 @@
+Exercise 4 - Parallel Nested Loops and collapse(2)
 
+Part 1 - Without collapse(2)
+
+The #pragma omp parallel for directive is applied only to the outer
+loop. Therefore, the five iterations of the r loop are distributed
+among the available threads.
+
+For each assigned value of r, the same thread executes all ten
+iterations of the inner k loop. Consequently, all values from k = 1
+to k = 10 for a particular value of r are normally processed by the
+same thread.
+
+Since five outer-loop iterations are distributed among four threads,
+one thread may receive two values of r while the other threads receive
+one value each. The exact mapping can depend on the OpenMP runtime and
+its scheduling policy.
+
+Part 2 - With collapse(2)
+
+The collapse(2) clause combines the two nested loops into a single
+iteration space. The five r iterations and ten k iterations produce
+a total of 5 x 10 = 50 combined iterations.
+
+These 50 combined iterations are distributed across the four threads.
+This provides a finer-grained and more balanced distribution of work
+than parallelizing only the five iterations of the outer loop.
+
+With the default static scheduling, the threads will normally receive
+approximately equal amounts of work. For 50 iterations and four
+threads, two threads normally receive 13 iterations each and the
+remaining two threads receive 12 iterations each.
+
+The output order is not sequential because the threads execute their
+assigned iterations concurrently.
