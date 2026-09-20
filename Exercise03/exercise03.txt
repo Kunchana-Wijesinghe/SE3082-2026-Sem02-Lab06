@@ -1,1 +1,17 @@
+Exercise 3 - OpenMP Master Directive
 
+The #pragma omp master directive specifies that the structured block
+must be executed only by the master thread, which is always thread 0.
+
+Therefore, "Inside Master" and "Exiting Master" are printed exactly
+once by thread 0. The statements outside the master block are executed
+by every thread in the parallel region.
+
+Unlike the single directive, the master directive does not contain an
+implicit barrier at its end. Therefore, the other threads do not have
+to wait for thread 0 to complete the master block. They may continue
+and print their "Hi again" messages while thread 0 is executing the
+master block.
+
+The order of the output may change between executions because the
+threads execute concurrently.
