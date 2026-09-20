@@ -1,0 +1,87 @@
+Exercise 8 - Molecular Dynamics Using OpenMP
+
+The molecular dynamics force calculation evaluates the Lennard-Jones
+interaction between pairs of particles in a box with periodic boundary
+conditions.
+
+Parallelization
+
+The outer particle loop is parallelized using:
+
+#pragma omp parallel for schedule(runtime)
+    reduction(+:potential, virial)
+
+The potential energy and virial are the two reduction variables.
+OpenMP gives each thread private partial values and combines them
+safely at the end of the parallel loop. This prevents data races on
+the accumulated energy values.
+
+Critical Directive
+
+A pair interaction updates the forces of both particle i and particle
+j. Different outer-loop iterations may update the same particle at
+the same time. Therefore, the shared force array is protected using:
+
+#pragma omp critical(force_update)
+
+This ensures that only one thread updates the shared force array at a
+time and prevents lost or corrupted force values.
+
+Correctness
+
+The serial reference produced:
+
+Potential energy = -3200.5886426909
+Virial           = -16936.4179779411
+
+The parallel implementation was tested with 1, 2, 3, and 4 threads.
+Every execution passed verification. The maximum force differences
+were approximately 10^-15, while the small differences in potential
+and virial were caused by the different floating-point addition order
+used during parallel reduction.
+
+Thread-count Performance
+
+1 thread:
+Time    = 0.020956 seconds
+Speedup = 0.96x
+
+2 threads:
+Time    = 0.007380 seconds
+Speedup = 2.73x
+
+3 threads:
+Time    = 0.014294 seconds
+Speedup = 1.41x
+
+4 threads:
+Time    = 0.019308 seconds
+Speedup = 1.04x
+
+The two-thread execution gave the best result in this test. Increasing
+the number of threads did not always improve performance because the
+critical region serializes shared force updates. Thread-management
+overhead and the short execution time also affect the measurements.
+
+Static Schedule Chunk-size Performance with Four Threads
+
+static,1:
+Time    = 0.028883 seconds
+Speedup = 0.70x
+
+static,4:
+Time    = 0.015965 seconds
+Speedup = 1.26x
+
+static,16:
+Time    = 0.015863 seconds
+Speedup = 1.27x
+
+static,64:
+Time    = 0.016104 seconds
+Speedup = 1.25x
+
+For this execution, static,16 produced the best measured time. The
+performance difference is caused by the balance between scheduling
+overhead, workload distribution, and critical-section contention.
+Timing results may vary between executions and systems.

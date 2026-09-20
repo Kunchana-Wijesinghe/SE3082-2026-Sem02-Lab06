@@ -1,0 +1,102 @@
+Molecular Dynamics Force Calculation
+Particles            : 1728
+Simulation box side  : 16.80
+Cutoff distance      : 2.50
+
+Serial reference
+Potential energy     : -3200.5886426909
+Virial               : -16936.4179779411
+Execution time       : 0.020147 seconds
+
+Thread-count comparison using schedule(static, 1)
+
+Threads              : 1
+Static chunk size    : 1
+Potential energy     : -3200.5886426909
+Virial               : -16936.4179779411
+Execution time       : 0.020956 seconds
+Speedup              : 0.96x
+Maximum force error  : 0.000000000000e+00
+Potential difference : 0.000000000000e+00
+Virial difference    : 0.000000000000e+00
+Verification         : PASS
+
+Threads              : 2
+Static chunk size    : 1
+Potential energy     : -3200.5886426913
+Virial               : -16936.4179779403
+Execution time       : 0.007380 seconds
+Speedup              : 2.73x
+Maximum force error  : 1.675742877794e-15
+Potential difference : 3.678906068671e-10
+Virial difference    : 7.385096978396e-10
+Verification         : PASS
+
+Threads              : 3
+Static chunk size    : 1
+Potential energy     : -3200.5886426908
+Virial               : -16936.4179779417
+Execution time       : 0.014294 seconds
+Speedup              : 1.41x
+Maximum force error  : 1.377370439926e-15
+Potential difference : 5.138645065017e-11
+Virial difference    : 5.711626727134e-10
+Verification         : PASS
+
+Threads              : 4
+Static chunk size    : 1
+Potential energy     : -3200.5886426907
+Virial               : -16936.4179779431
+Execution time       : 0.019308 seconds
+Speedup              : 1.04x
+Maximum force error  : 1.481453848484e-15
+Potential difference : 1.468833943363e-10
+Virial difference    : 1.975422492251e-09
+Verification         : PASS
+
+Chunk-size comparison using 4 threads
+
+Threads              : 4
+Static chunk size    : 1
+Potential energy     : -3200.5886426907
+Virial               : -16936.4179779431
+Execution time       : 0.028883 seconds
+Speedup              : 0.70x
+Maximum force error  : 1.693090112553e-15
+Potential difference : 1.464286469854e-10
+Virial difference    : 1.975422492251e-09
+Verification         : PASS
+
+Threads              : 4
+Static chunk size    : 4
+Potential energy     : -3200.5886426907
+Virial               : -16936.4179779431
+Execution time       : 0.015965 seconds
+Speedup              : 1.26x
+Maximum force error  : 1.592476150947e-15
+Potential difference : 1.459738996346e-10
+Virial difference    : 2.040906110778e-09
+Verification         : PASS
+
+Threads              : 4
+Static chunk size    : 16
+Potential energy     : -3200.5886426907
+Virial               : -16936.4179779431
+Execution time       : 0.015863 seconds
+Speedup              : 1.27x
+Maximum force error  : 2.248201624866e-15
+Potential difference : 1.459738996346e-10
+Virial difference    : 2.051820047200e-09
+Verification         : PASS
+
+Threads              : 4
+Static chunk size    : 64
+Potential energy     : -3200.5886426907
+Virial               : -16936.4179779430
+Execution time       : 0.016104 seconds
+Speedup              : 1.25x
+Maximum force error  : 2.144118216307e-15
+Potential difference : 1.459738996346e-10
+Virial difference    : 1.899024937302e-09
+Verification         : PASS
+
