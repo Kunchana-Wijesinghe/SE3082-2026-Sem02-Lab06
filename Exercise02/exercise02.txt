@@ -1,1 +1,18 @@
+Exercise 2 - OpenMP Single Directive
 
+The #pragma omp single directive specifies that the structured block
+must be executed by only one thread in the current parallel region.
+The thread that executes the single block is one of the threads that
+reaches it, and it is not necessarily thread 0.
+
+Therefore, "Inside Single" and "Exiting Single" are printed only once.
+However, the statements outside the single block are executed by all
+four threads.
+
+By default, an implicit barrier exists at the end of the single
+directive. Threads that do not execute the single block wait at this
+barrier until the selected thread completes it. The nowait clause can
+be used if this synchronization is not required.
+
+The exact order of the thread numbers may change between executions
+because the threads execute concurrently.
