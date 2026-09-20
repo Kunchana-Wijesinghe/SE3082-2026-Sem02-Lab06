@@ -1,0 +1,37 @@
+Exercise 7 - Area of the Mandelbrot Set
+
+The program estimates the area of the Mandelbrot Set using a
+1000 x 1000 grid and a maximum of 2000 iterations per point. Only the
+upper half of the set is sampled because the Mandelbrot Set is
+symmetric about the real axis. The calculated upper-half area is
+therefore multiplied by two.
+
+For every complex point c, the program evaluates z = z^2 + c using
+the initial condition z = c. A point is outside the set if |z| becomes
+greater than 2. If it does not diverge within 2000 iterations, it is
+counted as being inside the set.
+
+The parallel region is created before the outer loop. The omp for
+directive distributes the grid rows among the threads. The
+reduction(+:inside_count) clause gives each thread a private partial
+count and safely combines the counts after parallel execution. This
+prevents a data race.
+
+The program was tested using 1, 2, 3, and 4 threads. Every execution
+produced 268153 inside points and an estimated area of 1.50836062.
+Therefore, the parallel results are identical to the one-thread
+result.
+
+Execution times:
+1 thread  = 6.700650 seconds
+2 threads = 2.809767 seconds
+3 threads = 2.378919 seconds
+4 threads = 1.924147 seconds
+
+The four-thread execution achieved an approximate speedup of 3.48
+compared with the one-thread execution.
+
+Static scheduling distributes equal numbers of rows to the threads.
+However, different rows may require different amounts of computation
+because some points diverge earlier than others. Dynamic or guided
+scheduling may therefore produce different performance.

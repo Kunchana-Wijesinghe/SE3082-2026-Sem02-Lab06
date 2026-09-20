@@ -1,0 +1,32 @@
+Mandelbrot Set Area Estimation
+Grid size      : 1000 x 1000
+Maximum iterations: 2000
+
+Requested threads : 1
+Threads used      : 1
+Points inside     : 268153
+Estimated area    : 1.50836062
+Execution time    : 6.700650 seconds
+Verification      : Identical result
+
+Requested threads : 2
+Threads used      : 2
+Points inside     : 268153
+Estimated area    : 1.50836062
+Execution time    : 2.809767 seconds
+Verification      : Identical result
+
+Requested threads : 3
+Threads used      : 3
+Points inside     : 268153
+Estimated area    : 1.50836062
+Execution time    : 2.378919 seconds
+Verification      : Identical result
+
+Requested threads : 4
+Threads used      : 4
+Points inside     : 268153
+Estimated area    : 1.50836062
+Execution time    : 1.924147 seconds
+Verification      : Identical result
+
